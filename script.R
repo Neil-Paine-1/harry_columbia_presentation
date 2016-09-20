@@ -1,14 +1,19 @@
 #Clean list
+
 rm(list = ls())
 
 #Load required packages
+
 require(tidyverse)
 require(clipr)
 require(plotly)
 
+#=============#
 #Exercise time!
+#=============#
 
 #Exercise 1/Sheet 4 - Averaging data
+
 pollster_averages <- read_csv("pollster_averages.csv")
 
 pollster_averages <- pollster_averages %>% 
@@ -23,6 +28,7 @@ pollster_averages.T <- pollster_averages.T %>%
   mutate(average=(CNN+Fox_News+Marist+YouGov)/4)
 
 #Exercise 2/Sheet 5 - Plotting data
+
 states_2012_2016 <- read_csv("states_2012_2016.csv")
 
 states_2012_2016 %>% ggplot(aes(x=`2012`,y=`2016`))+geom_point()
@@ -30,6 +36,24 @@ states_2012_2016 %>% ggplot(aes(x=`2012`,y=`2016`))+geom_point()
 states_2012_2016 %>% ggplot(aes(x=`2012`,y=`2016`))+geom_point()+geom_abline()
 
 #states_2012_2016 %>% plot_ly(x=`2012`,y=`2016`,text=rownames(),mode="markers")
+
+#Exercise 3/Sheet 2 - Charting over time
+
+black_gop_support <- read_csv("black_gop_support.csv")
+
+black_gop_support %>% ggplot(aes(x=year,y=black_gop_support))+geom_point()
+
+black_gop_support %>% ggplot(aes(x=year,y=black_gop_support))+geom_point()+geom_smooth()
+
+#Exercise 4/Sheet 1 - Regression
+
+dem_share_by_state <- read_csv("dem_share_by_state.csv")
+
+reg.lm <- lm(clinton_share_primary ~ obama_share_2012 + black_pct_by_state,data = dem_share_by_state)
+
+summary(reg.lm)
+
+#Not sure what else Harry wants to do with this here...
 
 #Excerise 5/Sheet 3 - Doing your own crosstab analysis
 
